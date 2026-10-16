@@ -8,3 +8,6 @@
 
 #contact-form select[hidden]{display:none!important}
 
+
+/* Platform-independent monochrome icons, including iOS and Android. */
+.ui-icon{display:inline-block;width:1em;height:1em;vertical-align:-.12em;flex-shrink:0;pointer-events:none}.title-star .ui-icon{width:1em;height:1em;vertical-align:baseline}.choice-check .ui-icon{width:18px;height:18px}.pointer-ring .ui-icon{margin-left:4px}

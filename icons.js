@@ -1,0 +1,2 @@
+const siteIconPaths = {"↗": "M5 19 19 5M5 5h14v14", "↘": "M5 5 19 19M5 19h14V5", "↓": "M12 3v18M5 14l7 7 7-7", "↑": "M12 21V3M5 10l7-7 7 7", "←": "M21 12H3m7-7-7 7 7 7", "→": "M3 12h18m-7-7 7 7-7 7", "✓": "m5 12 4 4L19 6", "✳": "M12 2v20M2 12h20M5 5l14 14M5 19 19 5"};
+function siteIcon(symbol) { return `<svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="${siteIconPaths[symbol]}"/></svg>`; }

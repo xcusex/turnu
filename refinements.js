@@ -5,7 +5,7 @@
   const name=label.firstChild.textContent.trim();
   const wrap=document.createElement('div');wrap.className='choice';
   const trigger=document.createElement('button');trigger.type='button';trigger.className='choice-trigger';trigger.setAttribute('aria-haspopup','listbox');trigger.setAttribute('aria-expanded','false');trigger.setAttribute('aria-label',name);trigger.setAttribute('aria-controls',`choices-${index}`);
-  const value=document.createElement('span');const arrow=document.createElement('i');arrow.textContent='↘';trigger.append(value,arrow);
+  const value=document.createElement('span');const arrow=document.createElement('i');arrow.innerHTML=siteIcon('↘');trigger.append(value,arrow);
   const panel=document.createElement('div');panel.className='choice-panel';panel.id=`choices-${index}`;panel.setAttribute('role','listbox');panel.setAttribute('aria-label',name);panel.hidden=true;
   // Replace the wrapping label to avoid nested interactive label activation.
   const field=document.createElement('div');field.className='choice-field';const caption=document.createElement('span');caption.className='choice-caption';caption.textContent=name;
@@ -15,7 +15,7 @@
    const row=document.createElement('button');row.type='button';row.className='choice-option';row.setAttribute('role','option');row.tabIndex=-1;
    const num=document.createElement('span');num.className='choice-number';num.textContent=String(i+1).padStart(2,'0');const text=document.createElement('span');text.textContent=option.text;
    if(descriptions[option.text]){const small=document.createElement('small');small.textContent=descriptions[option.text];text.append(small)}
-   const check=document.createElement('span');check.className='choice-check';check.textContent='✓';row.append(num,text,check);panel.append(row);
+   const check=document.createElement('span');check.className='choice-check';check.innerHTML=siteIcon('✓');row.append(num,text,check);panel.append(row);
    row.addEventListener('click',()=>{select.selectedIndex=i;select.dispatchEvent(new Event('change',{bubbles:true}));close();trigger.focus()});
    row.addEventListener('keydown',e=>{let next=i;if(e.key==='ArrowDown')next=(i+1)%options.length;else if(e.key==='ArrowUp')next=(i+options.length-1)%options.length;else if(e.key==='Home')next=0;else if(e.key==='End')next=options.length-1;else return;e.preventDefault();options[next].focus()});
    return row;
@@ -31,7 +31,7 @@
  document.addEventListener('pointerdown',e=>widgets.forEach(w=>{if(!w.wrap.contains(e.target))w.close()}));
  document.querySelectorAll('[data-book],[data-event]').forEach(b=>b.addEventListener('click',()=>widgets.forEach(w=>w.sync())));
  const faq=document.querySelector('.faq');
- const intro=document.createElement('div');intro.className='faq-intro';intro.innerHTML='<p class="eyebrow">ПЕРЕД ЗНАКОМСТВОМ</p><h2>Хороший<br><em>вопрос.</em></h2><p>Несколько деталей,<br>чтобы было проще решиться.</p><a href="tel:+37379449911">Обсудим лично <span>↗</span></a>';
+ const intro=document.createElement('div');intro.className='faq-intro';intro.innerHTML='<p class="eyebrow">ПЕРЕД ЗНАКОМСТВОМ</p><h2>Хороший<br><em>вопрос.</em></h2><p>Несколько деталей,<br>чтобы было проще решиться.</p><a href="tel:+37379449911">Обсудим лично <span>'+siteIcon('↗')+'</span></a>';
  faq.querySelector(':scope > .eyebrow').replaceWith(intro);
  const list=document.createElement('div');list.className='faq-list';faq.append(list);
  faq.querySelectorAll('details').forEach((detail,i)=>{
@@ -42,7 +42,7 @@
   button.addEventListener('click',()=>{const open=button.getAttribute('aria-expanded')!=='true';list.querySelectorAll('.faq-item').forEach(other=>{const active=other===item&&open;other.classList.toggle('open',active);other.querySelector('button').setAttribute('aria-expanded',String(active));other.querySelector('.faq-answer').setAttribute('aria-hidden',String(!active));other.querySelector('.faq-answer').inert=!active})});
  });
  const ring=document.querySelector('.pointer-ring');
- document.addEventListener('pointermove',e=>{const media=e.target.closest('[data-gallery],.moment-card');ring.querySelector('span').textContent=media?.matches('.moment-card')?'Выбрать ↗':'Открыть ↗';ring.classList.toggle('over-control',!!e.target.closest('a,button,input,summary'));},{passive:true});
+ document.addEventListener('pointermove',e=>{const media=e.target.closest('[data-gallery],.moment-card');ring.querySelector('span').innerHTML=(media?.matches('.moment-card')?'Выбрать ':'Открыть ')+siteIcon('↗');ring.classList.toggle('over-control',!!e.target.closest('a,button,input,summary'));},{passive:true});
  document.addEventListener('pointerdown',()=>ring.classList.add('pressed'));
  const release=()=>ring.classList.remove('pressed');document.addEventListener('pointerup',release);document.addEventListener('pointercancel',release);addEventListener('blur',release);
 })();
